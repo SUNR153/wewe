@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Покупка билета на "{{ event.title }}"</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Купить</button>
+</form>
+<a href="{% url 'events:event_detail' event.id %}">Отмена</a>
+{% endblock %}

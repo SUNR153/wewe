@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Мои билеты</h2>
+<ul>
+    {% for ticket in tickets %}
+        <li>
+            <a href="{% url 'tickets:ticket_detail' ticket.pk %}">{{ ticket.event.title }}</a> — {{ ticket.quantity }} шт.
+        </li>
+    {% empty %}
+        <li>У вас нет билетов.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

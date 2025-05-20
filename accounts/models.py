@@ -5,7 +5,6 @@ class CustomUser(AbstractUser):
     ROLE_CHOICES = (
         ('user', 'Пользователь'),
         ('company', 'Компания'),
-        ('admin', 'Администратор'),
+        ('admin', 'Админ'),
     )
     role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='user')
-    email_confirmed = models.BooleanField(default=False)

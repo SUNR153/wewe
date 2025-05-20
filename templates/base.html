@@ -1,17 +1,10 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>Ticketon</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/modern-css-reset/dist/reset.min.css" />
-    <style>
-        body { font-family: Arial, sans-serif; max-width: 900px; margin: 20px auto; padding: 0 15px; }
-        header { margin-bottom: 30px; }
-        nav a { margin-right: 15px; text-decoration: none; color: blue; }
-        nav a:hover { text-decoration: underline; }
-        .messages { margin: 15px 0; color: green; }
-        .warning { color: darkorange; }
-    </style>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
 </head>
 <body>
 <header>
@@ -19,25 +12,31 @@
     <nav>
         <a href="{% url 'events:event_list' %}">События</a>
         {% if user.is_authenticated %}
-            <a href="{% url 'events:my_tickets' %}">Мои билеты</a>
+            <a href="{% url 'tickets:ticket_list' %}">Мои билеты</a>
+            {% if user.role == 'company' %}
+                <a href="{% url 'events:event_create' %}">Создать событие</a>
+            {% endif %}
             <a href="{% url 'accounts:logout' %}">Выйти</a>
-            <span>Привет, {{ user.username }}!</span>
+            <span>Привет, {{ user.username }}</span>
         {% else %}
             <a href="{% url 'accounts:login' %}">Войти</a>
-            <a href="{% url 'accounts:signup' %}">Регистрация</a>
+            <a href="{% url 'accounts:register' %}">Регистрация</a>
         {% endif %}
     </nav>
 </header>
+<main>
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 
-{% if messages %}
-    <div class="messages">
-        {% for message in messages %}
-            <p class="{% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</p>
-        {% endfor %}
-    </div>
-{% endif %}
-
-{% block content %}{% endblock %}
-
+    {% block content %}{% endblock %}
+</main>
+<footer>
+    <p>&copy; {{ year|default:"2025" }} Ticketon</p>
+</footer>
 </body>
 </html>
