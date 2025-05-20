@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Профиль пользователя</title>
+    <style>
+        body {
+            font-family: "Roboto", sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .btn {
+            margin-top: 20px;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #003366;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0055a5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Добро пожаловать, {{ user.username }}!</h1>
+        <p>Это ваша профильная страница.</p>
+        <a href="{% url 'logout' %}" class="btn">Выйти</a>
+    </div>
+</body>
+</html>

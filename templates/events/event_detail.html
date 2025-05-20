@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ event.title }}</h2>
+<p><strong>Дата и время:</strong> {{ event.date|date:"d M Y H:i" }}</p>
+<p><strong>Место:</strong> {{ event.location }}</p>
+<p><strong>Цена:</strong> {{ event.price }} ₽</p>
+<p>{{ event.description }}</p>
+
+{% if user.is_authenticated %}
+    <a href="{% url 'events:buy_ticket' event.pk %}">Купить билет</a>
+{% else %}
+    <p><a href="{% url 'login' %}">Войдите</a>, чтобы купить билет.</p>
+{% endif %}
+
+<a href="{% url 'events:event_list' %}">← Вернуться к списку</a>
+{% endblock %}

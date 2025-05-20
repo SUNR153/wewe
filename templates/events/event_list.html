@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Список событий</h2>
+<ul>
+    {% for event in events %}
+        <li>
+            <a href="{% url 'events:event_detail' event.pk %}">{{ event.title }}</a>
+            — {{ event.date|date:"d M Y H:i" }} — {{ event.location }} — {{ event.price }} ₽
+        </li>
+    {% empty %}
+        <li>Событий нет.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

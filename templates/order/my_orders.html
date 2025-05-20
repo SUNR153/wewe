@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Мои заказы</h1>
+<ul>
+  {% for order in orders %}
+  <li>
+    {{ order.event.title }} — {{ order.quantity }} билет(ов) — {{ order.ordered_at|date:"d.m.Y H:i" }}
+  </li>
+  {% empty %}
+  <li>Заказов нет.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Покупка билета на "{{ event.title }}"</h2>
+<p>Дата и время: {{ event.date|date:"d M Y H:i" }}</p>
+<p>Место: {{ event.location }}</p>
+<p>Цена: {{ event.price }} ₽</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Подтвердить покупку</button>
+    <a href="{% url 'events:event_detail' event.pk %}">Отмена</a>
+</form>
+{% endblock %}
